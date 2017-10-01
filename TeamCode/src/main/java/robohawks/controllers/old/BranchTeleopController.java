@@ -1,8 +1,9 @@
-package robohawks.controllers;
+package robohawks.controllers.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import robohawks.async.error.ErrorArgs;
 import robohawks.async.error.ErrorHandler;
+import robohawks.controllers.Controller;
 import robohawks.modules.base.ActuatorModule;
 import robohawks.modules.base.LiftModule;
 import robohawks.utils.MathX;

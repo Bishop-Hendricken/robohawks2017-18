@@ -1,7 +1,8 @@
-package robohawks.controllers;
+package robohawks.controllers.old;
 
 import robohawks.async.io.ControllerEventProcessor;
 import robohawks.async.io.EventGamepad;
+import robohawks.controllers.Controller;
 
 /**
  * Created by fchoi on 1/28/2017.

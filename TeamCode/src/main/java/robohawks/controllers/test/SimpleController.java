@@ -3,9 +3,7 @@ package robohawks.controllers.test;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import robohawks.async.Sequence;
-import robohawks.async.Sequencer;
 import robohawks.controllers.Controller;
-import robohawks.modules.SimpleModule;
 import robohawks.modules.base.DriveModule;
 
 /**

@@ -3,7 +3,6 @@ package robohawks.controllers.test;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import robohawks.async.Sequence;
-import robohawks.async.SimpleOperation;
 import robohawks.controllers.Controller;
 import robohawks.modules.base.ActuatorModule;
 import robohawks.modules.base.ColorModule;

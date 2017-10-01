@@ -1,4 +1,4 @@
-package robohawks.sequences;
+package robohawks.sequences.old;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 import robohawks.async.*;

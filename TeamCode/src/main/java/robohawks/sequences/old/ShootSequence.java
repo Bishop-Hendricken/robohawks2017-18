@@ -1,4 +1,4 @@
-package robohawks.sequences;
+package robohawks.sequences.old;
 
 import robohawks.async.Sequence;
 import robohawks.async.Sequencer;

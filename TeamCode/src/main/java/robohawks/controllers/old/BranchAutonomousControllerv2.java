@@ -1,19 +1,19 @@
-package robohawks.controllers;
+package robohawks.controllers.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import robohawks.async.Sequence;
+import robohawks.controllers.Controller;
 import robohawks.modules.base.*;
-import robohawks.sequences.ButtonSequence;
-import robohawks.sequences.LineSequence;
-import robohawks.sequences.ShootSequence;
+import robohawks.sequences.old.ButtonSequence;
+import robohawks.sequences.old.LineSequencev2;
+import robohawks.sequences.old.ShootSequence;
 
 /**
  * Created by paarth on 1/28/17.
  */
 
-@Autonomous(name = "BranchAutonomousControllerv1")
-public class BranchAutonomousControllerv1 extends Controller {
+@Autonomous(name = "BranchAutonomousControllerv2")
+public class BranchAutonomousControllerv2 extends Controller {
 
     Sequence sequence;
     ColorModule colorModule;
@@ -29,14 +29,14 @@ public class BranchAutonomousControllerv1 extends Controller {
         actuatorModule.initialize();
         colorModule.initialize();
 
-        LineSequence lineSequence = new LineSequence(sequencer, colorModule, driveModule, rangeModule);
+        LineSequencev2 lineSequence = new LineSequencev2(sequencer, colorModule, driveModule, rangeModule);
         ButtonSequence buttonSequence = new ButtonSequence(sequencer, actuatorModule, colorModule, true);
         ShootSequence shootSequence = new ShootSequence(sequencer, driveModule, launchModule);
 
         sequence = sequencer
-            .begin(lineSequence)
-            .then(buttonSequence)
-            .then(shootSequence);
+                .begin(lineSequence)
+                .then(buttonSequence)
+                .then(shootSequence);
     }
 
     @Override
