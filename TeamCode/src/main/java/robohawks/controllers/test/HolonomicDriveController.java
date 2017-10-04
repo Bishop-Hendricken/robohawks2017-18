@@ -13,12 +13,14 @@ public class HolonomicDriveController extends Controller{
     @Override
     public void init() {
         HolonomicDriveModule holonomicDriveModule = new HolonomicDriveModule(hardwareMap);
-        //TODO finish this
+        mainSequence = sequencer.begin(holonomicDriveModule.holonomicDrive(5, 1, 1, 1, 1));
     }
 
     @Override
     public void loop() {
         super.loop();
+
+        if(mainSequence.isFinished()) requestOpModeStop();
     }
 
 }
