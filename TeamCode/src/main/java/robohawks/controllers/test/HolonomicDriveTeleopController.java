@@ -32,6 +32,11 @@ public class HolonomicDriveTeleopController extends TeleopController implements 
             holonomicDriveModule.setPowerTwo(gamepad1.left_stick_x);
             holonomicDriveModule.setPowerThree(gamepad1.left_stick_x);
             holonomicDriveModule.setPowerFour(gamepad1.left_stick_x);
+        } else {
+            holonomicDriveModule.setPowerOne(0);
+            holonomicDriveModule.setPowerTwo(0);
+            holonomicDriveModule.setPowerThree(0);
+            holonomicDriveModule.setPowerFour(0);
         }
 
         if (Math.abs(gamepad1.right_stick_y) > threshold){
@@ -39,6 +44,11 @@ public class HolonomicDriveTeleopController extends TeleopController implements 
             holonomicDriveModule.setPowerTwo(-1 * gamepad1.left_stick_x);
             holonomicDriveModule.setPowerThree(gamepad1.left_stick_x);
             holonomicDriveModule.setPowerFour(-1 * gamepad1.left_stick_x);
+        } else {
+            holonomicDriveModule.setPowerOne(0);
+            holonomicDriveModule.setPowerTwo(0);
+            holonomicDriveModule.setPowerThree(0);
+            holonomicDriveModule.setPowerFour(0);
         }
     }
 
