@@ -1,6 +1,7 @@
 package robohawks.controllers.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
 
 import robohawks.async.Sequence;
 import robohawks.async.error.ErrorArgs;
@@ -27,29 +28,31 @@ public class HolonomicDriveTeleopController extends TeleopController implements 
     public void loop() {
         super.loop();
 
-        if (Math.abs(gamepad1.left_stick_x) > threshold){
-            holonomicDriveModule.setPowerOne(gamepad1.left_stick_x);
-            holonomicDriveModule.setPowerTwo(gamepad1.left_stick_x);
-            holonomicDriveModule.setPowerThree(gamepad1.left_stick_x);
-            holonomicDriveModule.setPowerFour(gamepad1.left_stick_x);
-        } else {
-            holonomicDriveModule.setPowerOne(0);
-            holonomicDriveModule.setPowerTwo(0);
-            holonomicDriveModule.setPowerThree(0);
-            holonomicDriveModule.setPowerFour(0);
-        }
+        // left stick controls direction
+        // right stick X controls rotation
 
-        if (Math.abs(gamepad1.right_stick_y) > threshold){
-            holonomicDriveModule.setPowerOne(gamepad1.right_stick_y);
-            holonomicDriveModule.setPowerTwo(-1 * gamepad1.right_stick_y);
-            holonomicDriveModule.setPowerThree(gamepad1.right_stick_y);
-            holonomicDriveModule.setPowerFour(-1 * gamepad1.right_stick_y);
-        } else {
-            holonomicDriveModule.setPowerOne(0);
-            holonomicDriveModule.setPowerTwo(0);
-            holonomicDriveModule.setPowerThree(0);
-            holonomicDriveModule.setPowerFour(0);
-        }
+        float gamepad1LeftY = -gamepad1.left_stick_y;
+        float gamepad1LeftX = gamepad1.left_stick_x;
+        float gamepad1RightX = gamepad1.right_stick_x;
+
+        // holonomic formulas
+
+        float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+        float FrontRight = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
+        float BackRight = gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+        float BackLeft = -gamepad1LeftY + gamepad1LeftX - gamepad1RightX;
+
+        // clip the right/left values so that the values never exceed +/- 1
+        FrontRight = Range.clip(FrontRight, -1, 1);
+        FrontLeft = Range.clip(FrontLeft, -1, 1);
+        BackLeft = Range.clip(BackLeft, -1, 1);
+        BackRight = Range.clip(BackRight, -1, 1);
+
+        // write the values to the motors
+        holonomicDriveModule.setPowerTwo(FrontRight);
+        holonomicDriveModule.setPowerOne(FrontLeft);
+        holonomicDriveModule.setPowerThree(BackLeft);
+        holonomicDriveModule.setPowerFour(BackRight);
     }
 
     @Override
