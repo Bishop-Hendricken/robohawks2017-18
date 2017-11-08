@@ -9,9 +9,6 @@ import robohawks.async.error.ErrorHandler;
 import robohawks.controllers.old.TeleopController;
 import robohawks.modules.base.HolonomicDriveModule;
 
-/**
- * Created by Paarth Tandon on 10/6/2017.
- */
 
 @TeleOp(name="HolonomicTeleop", group ="Teleop")
 public class HolonomicDriveTeleopController extends TeleopController implements ErrorHandler{
@@ -49,10 +46,10 @@ public class HolonomicDriveTeleopController extends TeleopController implements 
         BackRight = Range.clip(BackRight, -1, 1);
 
         // write the values to the motors
-        holonomicDriveModule.setPowerTwo(FrontRight);
-        holonomicDriveModule.setPowerOne(FrontLeft);
-        holonomicDriveModule.setPowerThree(BackLeft);
-        holonomicDriveModule.setPowerFour(BackRight);
+        holonomicDriveModule.setPowerTwo(FrontRight/2);
+        holonomicDriveModule.setPowerOne(FrontLeft/2);
+        holonomicDriveModule.setPowerThree(BackLeft/2);
+        holonomicDriveModule.setPowerFour(BackRight/2);
     }
 
     @Override
