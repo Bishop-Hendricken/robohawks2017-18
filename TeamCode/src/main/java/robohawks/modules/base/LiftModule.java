@@ -18,7 +18,7 @@ public class LiftModule {
     private boolean locked;
 
     public LiftModule(HardwareMap hardwareMap){
-        lift = hardwareMap.dcMotor.get("lift");
+        lift = hardwareMap.dcMotor.get("arm");
     }
 
     public void setPower(double power){

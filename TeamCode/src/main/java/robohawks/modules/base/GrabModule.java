@@ -3,6 +3,8 @@ package robohawks.modules.base;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import robohawks.async.Operation;
+
 /**
  * Created by Paarth Tandon on 10/20/2017.
  */
