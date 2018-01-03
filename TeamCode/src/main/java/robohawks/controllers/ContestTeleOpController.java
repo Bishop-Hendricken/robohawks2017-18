@@ -1,6 +1,8 @@
 package robohawks.controllers;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import robohawks.modules.base.GrabModule;
@@ -12,19 +14,19 @@ import robohawks.modules.base.TurnModule;
 public class ContestTeleOpController extends Controller{
 
     HolonomicDriveModule drive;
-    LiftModule arm;
-    GrabModule grab;
-    TurnModule turn;
+    DcMotor arm;
+    Servo leftServo;
+    Servo rightServo;
 
     @Override
     public void init() {
         drive = new HolonomicDriveModule(hardwareMap);
-        arm = new LiftModule(hardwareMap);
-        grab = new GrabModule(hardwareMap);
-        turn = new TurnModule(hardwareMap);
+        arm = hardwareMap.dcMotor.get("arm");
+        leftServo = hardwareMap.servo.get("left");
+        rightServo = hardwareMap.servo.get("right");
 
-        grab.setLeftServo(.5);
-        grab.setRightServo(.5);
+        leftServo.setPosition(.5);
+        rightServo.setPosition(.5);
     }
 
     @Override
@@ -69,27 +71,13 @@ public class ContestTeleOpController extends Controller{
         //Grab
 
         if (gamepad2.a){
-            grab.setLeftServo(1);
-            grab.setRightServo(1);
+            leftServo.setPosition(1);
+            rightServo.setPosition(1);
         }
 
         if (gamepad2.b){
-            grab.setLeftServo(.5);
-            grab.setRightServo(.5);
-        }
-
-        //Turn
-
-        if (gamepad2.dpad_right){
-            turn.setTurn(.5);
-        } else {
-            turn.setTurn(0);
-        }
-
-        if (gamepad2.dpad_left){
-            turn.setTurn(-.5);
-        } else {
-            turn.setTurn(0);
+            leftServo.setPosition(.5);
+            rightServo.setPosition(.5);
         }
 
     }
