@@ -14,7 +14,6 @@ import robohawks.modules.base.LaunchModule;
 /**
  * Created by fchoi on 10/13/2016.
  */
-@TeleOp(name="Branch", group ="Teleop")
 public class BranchTeleopController extends Controller implements ErrorHandler{
     DriveModule driveModule;
     LaunchModule launchModule;

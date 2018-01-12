@@ -1,6 +1,7 @@
 package robohawks.controllers;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -10,7 +11,7 @@ import robohawks.modules.base.HolonomicDriveModule;
 import robohawks.modules.base.LiftModule;
 import robohawks.modules.base.TurnModule;
 
-@TeleOp(name = "Contest", group = "Teleop")
+@TeleOp(name = "ContestTeleopController", group = "Teleop")
 public class ContestTeleOpController extends Controller{
 
     HolonomicDriveModule drive;
@@ -24,9 +25,6 @@ public class ContestTeleOpController extends Controller{
         arm = hardwareMap.dcMotor.get("arm");
         leftServo = hardwareMap.servo.get("left");
         rightServo = hardwareMap.servo.get("right");
-
-        leftServo.setPosition(.5);
-        rightServo.setPosition(.5);
     }
 
     @Override
@@ -35,9 +33,9 @@ public class ContestTeleOpController extends Controller{
 
         //Drive
 
-        float gamepad1LeftY = -gamepad1.left_stick_y;
-        float gamepad1LeftX = gamepad1.left_stick_x;
-        float gamepad1RightX = gamepad1.right_stick_x;
+        float gamepad1LeftY = gamepad1.left_stick_y;
+        float gamepad1LeftX = -gamepad1.left_stick_x;
+        float gamepad1RightX = -gamepad1.right_stick_x;
 
         float FrontLeft = -gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
         float FrontRight = gamepad1LeftY - gamepad1LeftX - gamepad1RightX;
@@ -56,13 +54,13 @@ public class ContestTeleOpController extends Controller{
 
         //Arm
 
-        if (gamepad2.dpad_up){
+        if (gamepad2.dpad_down){
             arm.setPower(.5);
         } else {
             arm.setPower(0);
         }
 
-        if (gamepad2.dpad_down){
+        if (gamepad2.dpad_up){
             arm.setPower(-.5);
         } else {
             arm.setPower(0);
@@ -70,15 +68,27 @@ public class ContestTeleOpController extends Controller{
 
         //Grab
 
-        if (gamepad2.a){
-            leftServo.setPosition(1);
-            rightServo.setPosition(1);
+        if (gamepad2.right_bumper){
+            rightServo.setPosition(.2);
+            leftServo.setPosition(0);
         }
 
-        if (gamepad2.b){
-            leftServo.setPosition(.5);
-            rightServo.setPosition(.5);
+        if (gamepad2.right_trigger > 0){
+            rightServo.setPosition(0);
+            leftServo.setPosition(.2);
         }
+
+        /*if (gamepad2.right_stick_x < 0){
+            leftServo.setPower(1);
+        }else{
+            leftServo.setPower(0);
+        }
+
+        if (gamepad2.right_stick_x > 0){
+            leftServo.setPower(-1);
+        }else{
+            leftServo.setPower(0);
+        }*/
 
     }
 

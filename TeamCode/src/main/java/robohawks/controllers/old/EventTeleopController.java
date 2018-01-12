@@ -14,7 +14,6 @@ import robohawks.modules.base.LaunchModule;
 /**
  * Created by fchoi on 10/13/2016.
  */
-@TeleOp(name="Event", group ="Teleop")
 public class EventTeleopController extends TeleopController implements ErrorHandler{
     DriveModule driveModule;
     LaunchModule launchModule;

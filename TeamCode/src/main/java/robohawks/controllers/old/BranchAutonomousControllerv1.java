@@ -13,7 +13,6 @@ import robohawks.sequences.old.ShootSequence;
  * Created by paarth on 1/28/17.
  */
 
-@Autonomous(name = "BranchAutonomousControllerv1")
 public class BranchAutonomousControllerv1 extends Controller {
 
     Sequence sequence;
