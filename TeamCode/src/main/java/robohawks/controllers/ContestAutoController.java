@@ -20,7 +20,7 @@ public class ContestAutoController extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private HolonomicDriveModule drive;
     private DcMotor arm;
-    private Servo leftServo;
+    private CRServo leftServo;
     private Servo rightServo;
 
 
@@ -35,7 +35,7 @@ public class ContestAutoController extends LinearOpMode {
 
         drive = new HolonomicDriveModule(hardwareMap);
         arm = hardwareMap.dcMotor.get("arm");
-        leftServo = hardwareMap.servo.get("left");
+        leftServo = hardwareMap.crservo.get("left");
         rightServo = hardwareMap.servo.get("right");
 
         telemetry.addData("STATUS", "INITEND");
@@ -46,7 +46,7 @@ public class ContestAutoController extends LinearOpMode {
 
         while(opModeIsActive()){
             rightServo.setPosition(.2);
-            leftServo.setPosition(.2);
+            leftServo.setPower(1);
 
             break;
         }

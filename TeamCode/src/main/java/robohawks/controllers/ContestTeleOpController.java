@@ -16,14 +16,14 @@ public class ContestTeleOpController extends Controller{
 
     HolonomicDriveModule drive;
     DcMotor arm;
-    Servo leftServo;
+    CRServo leftServo;
     Servo rightServo;
 
     @Override
     public void init() {
         drive = new HolonomicDriveModule(hardwareMap);
         arm = hardwareMap.dcMotor.get("arm");
-        leftServo = hardwareMap.servo.get("left");
+        leftServo = hardwareMap.crservo.get("left");
         rightServo = hardwareMap.servo.get("right");
     }
 
@@ -70,15 +70,13 @@ public class ContestTeleOpController extends Controller{
 
         if (gamepad2.right_bumper){
             rightServo.setPosition(.2);
-            leftServo.setPosition(0);
         }
 
         if (gamepad2.right_trigger > 0){
             rightServo.setPosition(0);
-            leftServo.setPosition(.2);
         }
 
-        /*if (gamepad2.right_stick_x < 0){
+        if (gamepad2.right_stick_x < 0){
             leftServo.setPower(1);
         }else{
             leftServo.setPower(0);
@@ -88,7 +86,7 @@ public class ContestTeleOpController extends Controller{
             leftServo.setPower(-1);
         }else{
             leftServo.setPower(0);
-        }*/
+        }
 
     }
 
