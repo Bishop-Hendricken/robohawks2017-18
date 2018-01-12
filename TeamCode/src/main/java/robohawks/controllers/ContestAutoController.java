@@ -83,7 +83,7 @@ public class ContestAutoController extends LinearOpMode {
 
         runtime.reset();
 
-        while(opModeIsActive() && runtime.seconds() <= .65){
+        while(opModeIsActive() && runtime.seconds() <= .75){
 
             telemetry.addData("STATUS", "OPMODESTART");
             telemetry.update();
@@ -111,7 +111,7 @@ public class ContestAutoController extends LinearOpMode {
 
         runtime.reset();
 
-        while(opModeIsActive() && runtime.seconds() <= 2) {
+        while(opModeIsActive() && runtime.seconds() <= 4.1) {
 
             float gamepad1LeftY = 1;
             float gamepad1LeftX = -1;
