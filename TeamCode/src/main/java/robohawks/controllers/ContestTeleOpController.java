@@ -69,11 +69,11 @@ public class ContestTeleOpController extends Controller{
         //Grab
 
         if (gamepad2.right_bumper){
-            rightServo.setPosition(.2);
+            rightServo.setPosition(.45);
         }
 
         if (gamepad2.right_trigger > 0){
-            rightServo.setPosition(0);
+            rightServo.setPosition(.75);
         }
 
         if (gamepad2.right_stick_x < 0){
