@@ -29,6 +29,31 @@ public class ContestTeleOpController extends Controller{
     public void loop() {
         super.loop();
 
+        //Test(Alcordo)
+        if(gamepad1.a){
+            drive.setPowerOne(1);
+        } else {
+            drive.setPowerOne(0);
+        }
+
+        if(gamepad1.b){
+            drive.setPowerTwo(1);
+        } else {
+            drive.setPowerTwo(0);
+        }
+
+        if(gamepad1.x){
+            drive.setPowerThree(1);
+        } else {
+            drive.setPowerThree(0);
+        }
+
+        if(gamepad1.y){
+            drive.setPowerFour(1);
+        } else {
+            drive.setPowerFour(0);
+        }
+
         //Drive
 
         if (gamepad1.dpad_up){
