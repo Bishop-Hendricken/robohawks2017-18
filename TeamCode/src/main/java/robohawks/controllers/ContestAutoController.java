@@ -14,7 +14,7 @@ import robohawks.modules.base.HolonomicDriveModule;
  * Created by Paarth Tandon on 1/3/2018.
  */
 
-@Autonomous(name = "ContestAutonomousController")
+
 public class ContestAutoController extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -27,8 +27,6 @@ public class ContestAutoController extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
-        locked = false;
 
         drive = new HolonomicDriveModule(hardwareMap);
         leftarm = hardwareMap.dcMotor.get("leftarm");
