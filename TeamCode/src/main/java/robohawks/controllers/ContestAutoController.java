@@ -19,125 +19,94 @@ public class ContestAutoController extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private HolonomicDriveModule drive;
-    private DcMotor arm;
-    private CRServo leftServo;
-    private Servo rightServo;
+    private DcMotor leftarm;
+    private DcMotor rightarm;
+    private Servo jewl;
+    private boolean locked;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        telemetry.addData("STATUS", "OPMODESTART");
-        telemetry.update();
-
-        telemetry.addData("STATUS", "INITSTART");
-        telemetry.update();
+        locked = false;
 
         drive = new HolonomicDriveModule(hardwareMap);
-        arm = hardwareMap.dcMotor.get("arm");
-        leftServo = hardwareMap.crservo.get("left");
-        rightServo = hardwareMap.servo.get("right");
-
-        telemetry.addData("STATUS", "INITEND");
-        telemetry.update();
+        leftarm = hardwareMap.dcMotor.get("leftarm");
+        rightarm = hardwareMap.dcMotor.get("rightarm");
+        jewl = hardwareMap.servo.get("jewl");
 
         waitForStart();
         runtime.reset();
 
-        while(opModeIsActive()){
-            rightServo.setPosition(.2);
-            leftServo.setPower(1);
+        jewl.setPosition(0);
 
-            break;
-        }
+        sleep(1000);
 
         runtime.reset();
 
-        while(opModeIsActive() && runtime.seconds() <= 2) {
+        while(opModeIsActive() && runtime.seconds() <= 1) {
 
-            float gamepad1LeftY = 1;
-            float gamepad1LeftX = -1;
-            float gamepad1RightX = -1;
-
-            float FrontLeft = .8f;
-            float FrontRight = -1;
-            float BackRight = -.8f;
-            float BackLeft = .8f;
-
-            FrontRight = Range.clip(FrontRight, -1, 1);
-            FrontLeft = Range.clip(FrontLeft, -1, 1);
-            BackLeft = Range.clip(BackLeft, -1, 1);
-            BackRight = Range.clip(BackRight, -1, 1);
-
-            drive.setPowerTwo(FrontRight/2);
-            drive.setPowerOne(FrontLeft/2);
-            drive.setPowerThree(BackLeft/2);
-            drive.setPowerFour(BackRight/2);
-
-            //drive.holonomicDrive(3, FrontLeft / 2, FrontRight / 2, BackLeft / 2, BackRight / 2);
-
-            telemetry.addData("STATUS", "OPMODEEND");
-            telemetry.update();
-
+            // Forward
+            drive.setPowerOne(-1);
+            drive.setPowerTwo(1);
+            drive.setPowerThree(1);
+            drive.setPowerFour(-1);
+            idle();
         }
+
+        sleep(1000);
+
+        jewl.setPosition(1);
+
+        sleep(1000);
 
         runtime.reset();
 
-        while(opModeIsActive() && runtime.seconds() <= .75){
 
-            telemetry.addData("STATUS", "OPMODESTART");
-            telemetry.update();
+        while(opModeIsActive() && runtime.seconds() <= 1){
+            //Turn Right
+            drive.setPowerOne(-1);
+            drive.setPowerTwo(-1);
+            drive.setPowerThree(-1);
+            drive.setPowerFour(-1);
 
-            float FrontLeft = -1f;
-            float FrontRight = -1f;
-            float BackRight = -1f;
-            float BackLeft = -1f;
-
-            FrontRight = Range.clip(FrontRight, -1, 1);
-            FrontLeft = Range.clip(FrontLeft, -1, 1);
-            BackLeft = Range.clip(BackLeft, -1, 1);
-            BackRight = Range.clip(BackRight, -1, 1);
-
-            drive.setPowerTwo(FrontRight/2);
-            drive.setPowerOne(FrontLeft/2);
-            drive.setPowerThree(BackLeft/2);
-            drive.setPowerFour(BackRight/2);
-
-            //drive.holonomicDrive(3, FrontLeft / 2, FrontRight / 2, BackLeft / 2, BackRight / 2);
-
-            telemetry.addData("STATUS", "OPMODEEND");
-            telemetry.update();
+            idle();
         }
+
+        sleep(1000);
 
         runtime.reset();
 
-        while(opModeIsActive() && runtime.seconds() <= 4.1) {
 
-            float gamepad1LeftY = 1;
-            float gamepad1LeftX = -1;
-            float gamepad1RightX = -1;
 
-            float FrontLeft = .8f;
-            float FrontRight = -1;
-            float BackRight = -.8f;
-            float BackLeft = .8f;
+        while(opModeIsActive() && runtime.seconds() <= 1) {
 
-            FrontRight = Range.clip(FrontRight, -1, 1);
-            FrontLeft = Range.clip(FrontLeft, -1, 1);
-            BackLeft = Range.clip(BackLeft, -1, 1);
-            BackRight = Range.clip(BackRight, -1, 1);
+            // Back
+            drive.setPowerOne(1);
+            drive.setPowerTwo(-1);
+            drive.setPowerThree(-1);
+            drive.setPowerFour(1);
 
-            drive.setPowerTwo(FrontRight/2);
-            drive.setPowerOne(FrontLeft/2);
-            drive.setPowerThree(BackLeft/2);
-            drive.setPowerFour(BackRight/2);
-
-            //drive.holonomicDrive(3, FrontLeft / 2, FrontRight / 2, BackLeft / 2, BackRight / 2);
-
-            telemetry.addData("STATUS", "OPMODEEND");
-            telemetry.update();
+            idle();
 
         }
+
+        sleep(1000);
+        runtime.reset();
+
+
+
+        while(opModeIsActive() && runtime.seconds() <= 1) {
+            //Drop
+            leftarm.setPower(.5);
+            rightarm.setPower(.5);
+
+            idle();
+        }
+
+
+
+        runtime.reset();
     }
 
 }

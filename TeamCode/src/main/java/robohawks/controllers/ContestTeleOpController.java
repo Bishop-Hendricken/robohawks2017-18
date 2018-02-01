@@ -17,12 +17,14 @@ public class ContestTeleOpController extends Controller{
     HolonomicDriveModule drive;
     DcMotor leftarm;
     DcMotor rightarm;
+    boolean inverse;
 
     @Override
     public void init() {
         drive = new HolonomicDriveModule(hardwareMap);
         leftarm = hardwareMap.dcMotor.get("leftarm");
         rightarm = hardwareMap.dcMotor.get("rightarm");
+        inverse = false;
     }
 
     @Override
@@ -56,48 +58,115 @@ public class ContestTeleOpController extends Controller{
 
         //Drive
 
-        if (gamepad1.dpad_up){
-            drive.setPowerOne(.5);
-            drive.setPowerTwo(.5);
-            drive.setPowerThree(.5);
-            drive.setPowerFour(.5);
-        } else if (gamepad1.dpad_down) {
-            drive.setPowerOne(-.5);
-            drive.setPowerTwo(-.5);
-            drive.setPowerThree(-.5);
-            drive.setPowerThree(-.5);
-        } else if (gamepad1.dpad_left){
-            drive.setPowerOne(.5);
-            drive.setPowerTwo(-.5);
-            drive.setPowerThree(-.5);
-            drive.setPowerFour(.5);
-        } else if (gamepad1.dpad_right){
-            drive.setPowerOne(-.5);
-            drive.setPowerTwo(.5);
-            drive.setPowerThree(.5);
-            drive.setPowerFour(-.5);
+        if (gamepad1.right_trigger>0){
+            inverse = true;
         } else {
-            drive.setPowerOne(0);
-            drive.setPowerTwo(0);
-            drive.setPowerThree(0);
-            drive.setPowerFour(0);
+            inverse = false;
         }
 
-        if(gamepad1.right_stick_x > 1){
-            drive.setPowerOne(.5);
-            drive.setPowerTwo(.5);
-            drive.setPowerThree(.5);
-            drive.setPowerFour(.5);
-        } else if (gamepad1.right_stick_x < 0){
-            drive.setPowerOne(-.5);
-            drive.setPowerTwo(-.5);
-            drive.setPowerThree(-.5);
-            drive.setPowerFour(-.5);
+        if (!inverse) {
+
+            if (gamepad1.dpad_up) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(-1);
+            } else if (gamepad1.dpad_down) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(1);
+            } else if (gamepad1.dpad_left) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(-1);
+            } else if (gamepad1.dpad_right) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
+
+            if (gamepad1.right_stick_x > 0) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(-1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
+
+            if (gamepad1.right_stick_x < 0) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
         } else {
-            drive.setPowerOne(0);
-            drive.setPowerTwo(0);
-            drive.setPowerThree(0);
-            drive.setPowerFour(0);
+            if (gamepad1.dpad_up) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(1);
+            } else if (gamepad1.dpad_down) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(-1);
+            } else if (gamepad1.dpad_left) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(1);
+            } else if (gamepad1.dpad_right) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(-1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
+
+            if (gamepad1.right_stick_x > 0) {
+                drive.setPowerOne(1);
+                drive.setPowerTwo(1);
+                drive.setPowerThree(1);
+                drive.setPowerFour(1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
+
+            if (gamepad1.right_stick_x < 0) {
+                drive.setPowerOne(-1);
+                drive.setPowerTwo(-1);
+                drive.setPowerThree(-1);
+                drive.setPowerFour(-1);
+            } else {
+                drive.setPowerOne(0);
+                drive.setPowerTwo(0);
+                drive.setPowerThree(0);
+                drive.setPowerFour(0);
+            }
         }
 
 //        float gamepad1LeftY = gamepad1.left_stick_y;
